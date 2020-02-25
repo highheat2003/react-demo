@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+/* li메뉴를 수평으로 출력 */
+ul.hmenu {
+  min-width: 696px;
+  list-style: none;
+  padding: 0px;
+}
+ul.hmenu li {
+  display: inline;
+  padding-right: 5px;
+}
