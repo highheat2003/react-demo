@@ -1,3 +1,5 @@
+import produce from "immer";
+
 /*
     Action의 종류
  */
@@ -25,42 +27,34 @@ const initialState = {
     id: undefined, /* 수정,삭제시 선택된 id */
 };
 
-
-export default function postReducer(state = initialState, action){
+const postReducer = (state = initialState, action) => {
     console.log('postReducer : ',action.type);
     switch (action.type) {
         case ADD_POST:
-            return {
-                ...state,
-                posts: state.posts.concat(action.data)
-            };
+            return produce(state, draft => {
+                draft.posts.push(action.data);
+            });
         case DELETE_POST:
-            return {
-                ...state,
-                posts: state.posts.filter((post)=>post.id !== action.id)
-            }
+            return produce(state, draft => {
+                const index = draft.posts.findIndex(post => post.id === action.id);
+                draft.posts.splice(index, 1);
+            });
         case EDIT_POST:
-            return {
-                ...state,
-                //post:
-                posts: state.posts.map((post)=>post.id === action.id ? {...post,editing:!post.editing}:post)
-            }
+            return produce(state, draft => {
+                const post = draft.posts.find(post => post.id === action.id);
+                post.editing = !post.editing;
+            });
         case UPDATE_POST:
-            return {
-                ...state,
-                posts: state.posts.map((post)=>{
-                    if(post.id === action.id) {
-                        return {
-                            ...post,
-                            title:action.data.newTitle,
-                            message:action.data.newMessage,
-                            editing: !post.editing
-                        }
-                    } else return post;
-                })
-            }
+            return produce(state, draft => {
+                const post = draft.posts.find(post => post.id === action.id);
+                post.title = action.data.newTitle;
+                post.message = action.data.newMessage;
+                post.editing = !post.editing;
+            });
         default:
             return state;
     }
 }
+
+export default postReducer;
 
