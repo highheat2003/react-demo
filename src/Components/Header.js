@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import ThunkDemo from "../Thunk/ThunkDemo";
 
 const Header = () => (
     <div>
@@ -15,6 +16,9 @@ const Header = () => (
             </li>
             <li>
                 <Link to="/crud">Crud</Link>
+            </li>
+            <li>
+                <Link to="/thunkdemo">ThunkDemo</Link>
             </li>
         </ul>
     </div>

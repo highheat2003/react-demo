@@ -8,6 +8,7 @@ import Todo from "./Todo/Todo";
 import Counter from "./Counter/Counter";
 import Counter2Container from "./Counter/Counter2Container";
 import Crud from "./Crud/Crud";
+import ThunkDemo from "./Thunk/ThunkDemo";
 
 export default () => (
     <Router>
@@ -19,6 +20,7 @@ export default () => (
         <Route path="/counter" component={Counter} />
         <Route path="/counter2" component={Counter2Container} />
         <Route path="/crud" component={Crud} />
+        <Route path="/thunkdemo" component={ThunkDemo} />
     </Router>
 )
 
